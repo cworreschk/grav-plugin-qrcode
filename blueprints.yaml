@@ -1,0 +1,113 @@
+name: QR Code
+version: 0.1.0
+description: QR code generator
+icon: qrcode
+author:
+  name: Christian Worreschk
+  email: cw@marsec.de
+homepage: https://github.com/cworreschk/grav-plugin-qrcode
+keywords: qr code, code
+bugs: https://github.com/cworreschk/grav-plugin-qrcode/issues
+docs: https://github.com/cworreschk/grav-plugin-qrcode/blob/master/README.md
+license: MIT
+
+form:
+  validation: strict
+  fields:
+
+    enabled:
+      type: toggle
+      label: PLUGIN_QRCODE.PLUGIN_STATUS
+      highlight: 1
+      default: 0
+      options:
+        1: PLUGIN_QRCODE.ENABLED
+        0: PLUGIN_QRCODE.DISABLED
+      validate:
+        type: bool
+
+    parameters:
+      type: section
+      title: PLUGIN_QRCODE.PARAMETERS
+      underline: true
+      fields:
+
+        parameters.size:
+          type: text
+          size: small
+          label: PLUGIN_QRCODE.SIZE
+          help: PLUGIN_QRCODE.SIZE_HELP
+          default: 100
+          validate:
+            type: number
+            min: 1
+            max: 65535
+
+        parameters.padding:
+          type: text
+          size: small
+          label: PLUGIN_QRCODE.PADDING
+          default: 16
+          validate:
+            type: number
+            min: 1
+            max: 65535
+
+        parameters.error_correction_level:
+          type: select
+          size: small
+          label: PLUGIN_QRCODE.ERROR_CORRECTION_LEVEL
+          help: PLUGIN_QRCODE.ERROR_CORRECTION_LEVEL_HELP
+          default: medium
+          options:
+            low: PLUGIN_QRCODE.EC_LOW
+            medium: PLUGIN_QRCODE.EC_MEDIUM
+            quartile: PLUGIN_QRCODE.EC_QUARTILE
+            high: PLUGIN_QRCODE.EC_HIGH
+
+        parameters.image_type:
+          type: select
+          size: small
+          label: PLUGIN_QRCODE.IMAGE_TYPE
+          default: png
+          options:
+            gif: GIF
+            jpeg: JPEG
+            png: PNG
+
+        parameters.foreground_color:
+          type: colorpicker
+          label: PLUGIN_QRCODE.FOREGROUND_COLOR
+          highlight: 1
+          default: "rgba(0, 0, 0, 1)"
+
+        parameters.background_color:
+          type: colorpicker
+          label: PLUGIN_QRCODE.BACKGROUND_COLOR
+          highlight: 1
+          default: "rgba(255, 255, 255, 1)"
+
+        parameters.border:
+          type: toggle
+          label: PLUGIN_QRCODE.BORDER
+          help: PLUGIN_QRCODE.BORDER_HELP
+          highlight: 1
+          default: 0
+          options:
+            1: PLUGIN_QRCODE.ENABLED
+            0: PLUGIN_QRCODE.DISABLED
+          validate:
+            type: bool
+
+        parameters.quiet_zone:
+          type: toggle
+          label: PLUGIN_QRCODE.QUIET_ZONE
+          help: PLUGIN_QRCODE.QUIET_ZONE_HELP
+          highlight: 1
+          default: 0
+          options:
+            1: PLUGIN_QRCODE.ENABLED
+            0: PLUGIN_QRCODE.DISABLED
+          validate:
+            type: bool
+

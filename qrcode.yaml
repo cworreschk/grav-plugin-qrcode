@@ -1,0 +1,11 @@
+enabled: true
+
+parameters:
+  size: 200
+  padding: 16
+  error_correction_level: medium
+  image_type: png
+  foreground_color: "rgba(0, 0, 0, 1)"
+  background_color: "rgba(255, 255, 255, 1)"
+  border: 0
+  quiet_zone: 0

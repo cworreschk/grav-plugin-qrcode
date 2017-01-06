@@ -1,0 +1,25 @@
+PLUGIN_QRCODE:
+
+  ENABLED: "Aktiviert"
+  DISABLED: "Deaktiviert"
+  PLUGIN_STATUS: "Plugin Status"
+  PARAMETERS: "Parameter"
+
+  SIZE: "Größe"
+  SIZE_HELP: "Größe (Breite) des QR-Codes"
+  PADDING: "Abstand"
+  PADDING_HELP: "Abstand umd den QR-Code"
+  FOREGROUND_COLOR: "Vordergrundfarbe"
+  BACKGROUND_COLOR: "Hintergrundfarbe"
+  ERROR_CORRECTION_LEVEL: " Fehlerkorrektur-Level"
+  ERROR_CORRECTION_LEVEL_HELP: "Gibt an wieviel Prozent beschädigter Daten rekonstruiert werden können."
+  EC_LOW: "Niedrig (7%)"
+  EC_MEDIUM: "Mittel (15%)"
+  EC_QUARTILE: "Quartile (25%)"
+  EC_HIGH: "Hoch (30%)"
+  IMAGE_TYPE: "Bildformat"
+  BORDER: "Rand"
+  BORDER_HELP: "Rand um den QR-Code"
+  QUIET_ZONE: "Randzone"
+  QUIET_ZONE_HELP: "Erforderliche 4 Elemente breite Randzone."
+
