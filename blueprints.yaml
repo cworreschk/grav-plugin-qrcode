@@ -28,15 +28,16 @@ form:
 
     parameters:
       type: section
-      title: PLUGIN_QRCODE.PARAMETERS
+      title: PLUGIN_QRCODE.GENERAL
       underline: true
       fields:
 
         parameters.size:
           type: text
-          size: small
+          size: x-small
           label: PLUGIN_QRCODE.SIZE
           help: PLUGIN_QRCODE.SIZE_HELP
+          append: px
           default: 100
           validate:
             type: number
@@ -45,9 +46,10 @@ form:
 
         parameters.padding:
           type: text
-          size: small
+          size: x-small
           label: PLUGIN_QRCODE.PADDING
           default: 16
+          append: px
           validate:
             type: number
             min: 1
@@ -111,3 +113,25 @@ form:
           validate:
             type: bool
 
+    parameters.label:
+      type: section
+      title: PLUGIN_QRCODE.LABEL
+      text: PLUGIN_QRCODE.LABEL_TEXT
+      underline: true
+      fields:
+
+        parameters.label.text:
+          type: text
+          size: medium
+          label: PLUGIN_QRCODE.TEXT
+
+        parameters.label.font_size:
+          type: text
+          size: x-small
+          label: PLUGIN_QRCODE.FONT_SIZE
+          default: 16
+          append: px
+          validate:
+            type: number
+            min: 1
+            max: 65535

@@ -4,6 +4,8 @@ PLUGIN_QRCODE:
   DISABLED: "Deaktiviert"
   PLUGIN_STATUS: "Plugin Status"
   PARAMETERS: "Parameter"
+  GENERAL : "Allgemein"
+  TEXT : "Text"
 
   SIZE: "Größe"
   SIZE_HELP: "Größe (Breite) des QR-Codes"
@@ -22,4 +24,7 @@ PLUGIN_QRCODE:
   BORDER_HELP: "Rand um den QR-Code"
   QUIET_ZONE: "Randzone"
   QUIET_ZONE_HELP: "Erforderliche 4 Elemente breite Randzone."
+  LABEL: "Beschriftung"
+  LABEL_TEXT: "Die Beschriftung wird unterhalb des QR Codes angezeigt."
+  FONT_SIZE: "Schriftgröße"
 

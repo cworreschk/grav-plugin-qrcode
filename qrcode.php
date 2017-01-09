@@ -14,6 +14,7 @@ class QrCodePlugin extends Plugin
 {
 
     const QRCODE_REGEX = '/\[qrcode(.*)\](.*)\[\/qrcode\]/i';
+    const QRCODE_ATTRIBUTES_REGEX = '/(\w+)\s*=\s*((?:[^\"\'\s]+)|\'(?:[^\']*)\'|\"(?:[^\"]*)\")/i';
 
     /**
      * @return array
@@ -68,6 +69,24 @@ class QrCodePlugin extends Plugin
         $this->grav['twig']->twig_paths[] = __DIR__ . '/templates';
     }
 
+    private function buildParameters($inline, $config_params)
+    {
+        preg_match_all(static::QRCODE_ATTRIBUTES_REGEX, $inline, $matches);
+        if ((!isset($matches[1])) || empty($matches[1])) return $config_params;
+
+        foreach ($matches[1] as $idx => $key){
+            $value = preg_replace('/[\"\'](.*)[\"\']/', "$1", $matches[2][$idx]);
+            if (strpos($key, 'label_') === 0) {
+                $key = substr($key, 6);
+                $config_params['label'][$key] = $value;
+            } else {
+                $config_params[$key] = $value;
+            }
+        }
+
+        return $config_params;
+    }
+
     public function onPageContentRaw(Event $e)
     {
         $page = $e['page'];
@@ -85,11 +104,7 @@ class QrCodePlugin extends Plugin
             // Parameters
             $parameters = $config->get('parameters', []);
             if (isset($matches[1]) && (!empty($matches[1]))) {
-                $params = explode(' ', trim($matches[1]));
-                foreach ($params as $param){
-                    $kv = explode('=', $param);
-                    if (count($kv) == 2) $parameters[trim($kv[0])] = trim($kv[1]);
-                }
+                $parameters = $this->buildParameters($matches[1], $parameters);
             }
 
             // Build the replacement embed HTML string

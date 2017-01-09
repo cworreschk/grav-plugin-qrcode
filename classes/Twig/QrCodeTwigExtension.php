@@ -55,10 +55,19 @@ class QrCodeTwigExtension extends \Twig_Extension
         if (isset($params['border'])) $qrCode->setDrawBorder(boolval($params['border']));
         if (isset($params['quiet_zone'])) $qrCode->setDrawQuietZone(boolval($params['quiet_zone']));
 
+        // Label
+        if (isset($params['label'])){
+            if (isset($params['label']['text'])) $qrCode->setLabel($params['label']['text']);
+            if (isset($params['label']['font_size'])) $qrCode->setLabelFontSize((int)$params['label']['font_size']);
+        }
+
+        // Foreground
         if (isset($params['foreground_color'])){
             $color = $this->buildColorArray($params['foreground_color']);
             if (!is_null($color)) $qrCode->setForegroundColor($color);
         }
+
+        // Background
         if (isset($params['background_color'])){
             $color = $this->buildColorArray($params['background_color']);
             if (!is_null($color)) $qrCode->setBackgroundColor($color);

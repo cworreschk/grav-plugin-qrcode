@@ -4,6 +4,8 @@ PLUGIN_QRCODE:
   DISABLED: "Disabled"
   PLUGIN_STATUS: "Plugin status"
   PARAMETERS: "Parameters"
+  GENERAL : "General"
+  TEXT : "Text"
 
   SIZE: "Size"
   SIZE_HELP: "Size (with) of the QR Code"
@@ -22,4 +24,6 @@ PLUGIN_QRCODE:
   BORDER_HELP: "Border around the QR Code"
   QUIET_ZONE: "Quiet Zone"
   QUIET_ZONE_HELP: "Required four-module wide margin."
-
+  LABEL: "Label"
+  LABEL_TEXT: "The label will be printed under the QR Code."
+  FONT_SIZE: "Font Size"

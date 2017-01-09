@@ -9,3 +9,6 @@ parameters:
   background_color: "rgba(255, 255, 255, 1)"
   border: false
   quiet_zone: false
+  label:
+    text: ""
+    font_size: 16
