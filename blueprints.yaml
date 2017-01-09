@@ -26,7 +26,7 @@ form:
       validate:
         type: bool
 
-    parameters:
+    parameters.section_general:
       type: section
       title: PLUGIN_QRCODE.GENERAL
       underline: true
@@ -113,19 +113,19 @@ form:
           validate:
             type: bool
 
-    parameters.label:
+    parameters.section_label:
       type: section
       title: PLUGIN_QRCODE.LABEL
       text: PLUGIN_QRCODE.LABEL_TEXT
       underline: true
       fields:
 
-        parameters.label.text:
+        parameters.label:
           type: text
           size: medium
-          label: PLUGIN_QRCODE.TEXT
+          label: PLUGIN_QRCODE.LABEL
 
-        parameters.label.font_size:
+        parameters.label_font_size:
           type: text
           size: x-small
           label: PLUGIN_QRCODE.FONT_SIZE
@@ -135,3 +135,30 @@ form:
             type: number
             min: 1
             max: 65535
+
+    parameters.section_logo:
+      type: section
+      title: PLUGIN_QRCODE.LOGO
+      text: PLUGIN_QRCODE.LOGO_TEXT
+      underline: true
+      fields:
+
+         parameters.logo:
+            type: file
+            label: PLUGIN_QRCODE.IMAGE
+            multiple: false
+            destination: "user/plugins/qrcode/assets"
+            allow:
+              - image/*
+
+         parameters.logo_size:
+           type: text
+           size: x-small
+           label: PLUGIN_QRCODE.SIZE
+           help: PLUGIN_QRCODE.LOGO_SIZE_HELP
+           append: px
+           default: 48
+           validate:
+             type: number
+             min: 1
+             max: 65535

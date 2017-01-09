@@ -75,13 +75,7 @@ class QrCodePlugin extends Plugin
         if ((!isset($matches[1])) || empty($matches[1])) return $config_params;
 
         foreach ($matches[1] as $idx => $key){
-            $value = preg_replace('/[\"\'](.*)[\"\']/', "$1", $matches[2][$idx]);
-            if (strpos($key, 'label_') === 0) {
-                $key = substr($key, 6);
-                $config_params['label'][$key] = $value;
-            } else {
-                $config_params[$key] = $value;
-            }
+            $config_params[$key] = preg_replace('/[\"\'](.*)[\"\']/', "$1", $matches[2][$idx]); // Without quotes
         }
 
         return $config_params;
@@ -93,18 +87,25 @@ class QrCodePlugin extends Plugin
         $config = $this->mergeConfig($page, true);
         if (!$config->get('enabled')) return;
 
-        // Function
         $twig = $this->grav['twig'];
-        $function = function ($matches) use ($twig, $config) {
+        $page_params = $config->get('parameters', []);
+
+        if (isset($page_params['logo']) && (!is_string($page_params['logo'])) && (! empty($page_params['logo']))) {
+            $logo = reset($page_params['logo']);
+            if (isset($logo['path'])) $page_params['logo'] = $logo['path'];
+        }
+
+        // Function
+        $function = function ($matches) use ($twig, $page_params) {
             $search = $matches[0];
 
             // Double check to make sure we found something
             if (!isset($matches[2])) return $search;
 
-            // Parameters
-            $parameters = $config->get('parameters', []);
+            // Inline Attributes
+            $parameters = $page_params;
             if (isset($matches[1]) && (!empty($matches[1]))) {
-                $parameters = $this->buildParameters($matches[1], $parameters);
+                $parameters = $this->buildParameters($matches[1], $page_params);
             }
 
             // Build the replacement embed HTML string

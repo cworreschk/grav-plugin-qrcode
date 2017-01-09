@@ -47,6 +47,7 @@ class QrCodeTwigExtension extends \Twig_Extension
     {
         $qrCode = new QrCode();
         $qrCode->setText($text);
+        $grav = static::getGrav();
 
         if (isset($params['size'])) $qrCode->setSize((int)$params['size']);
         if (isset($params['padding'])) $qrCode->setPadding((int)$params['padding']);
@@ -56,13 +57,19 @@ class QrCodeTwigExtension extends \Twig_Extension
         if (isset($params['quiet_zone'])) $qrCode->setDrawQuietZone(boolval($params['quiet_zone']));
 
         // Label
-        if (isset($params['label'])){
-            if (isset($params['label']['text'])) $qrCode->setLabel($params['label']['text']);
-            if (isset($params['label']['font_size'])) $qrCode->setLabelFontSize((int)$params['label']['font_size']);
+        if (isset($params['label'])) {
+            $qrCode->setLabel($params['label']);
+            if (isset($params['label_font_size'])) $qrCode->setLabelFontSize((int)$params['label_font_size']);
+        }
+
+        // Logo
+        if (isset($params['logo']) && file_exists($params['logo'])) {
+            $qrCode->setLogo($params['logo']);
+            if (isset($params['logo']['size'])) $qrCode->setLogoSize((int)$params['logo']['size']);
         }
 
         // Foreground
-        if (isset($params['foreground_color'])){
+        if (isset($params['foreground_color'])) {
             $color = $this->buildColorArray($params['foreground_color']);
             if (!is_null($color)) $qrCode->setForegroundColor($color);
         }

@@ -6,9 +6,10 @@ PLUGIN_QRCODE:
   PARAMETERS: "Parameter"
   GENERAL : "Allgemein"
   TEXT : "Text"
+  IMAGE: "Bild"
 
   SIZE: "Größe"
-  SIZE_HELP: "Größe (Breite) des QR-Codes"
+  SIZE_HELP: "Größe (Breite x Höhe) des QR-Codes"
   PADDING: "Abstand"
   PADDING_HELP: "Abstand umd den QR-Code"
   FOREGROUND_COLOR: "Vordergrundfarbe"
@@ -26,5 +27,8 @@ PLUGIN_QRCODE:
   QUIET_ZONE_HELP: "Erforderliche 4 Elemente breite Randzone."
   LABEL: "Beschriftung"
   LABEL_TEXT: "Die Beschriftung wird unterhalb des QR Codes angezeigt."
+  LOGO: "Logo"
+  LOGO_TEXT: "Das Logo wird in der Mitte des QR Codes angezeigt."
+  LOGO_SIZE_HELP: "Logo-Größe (Breite x Höhe) im QR-Code"
   FONT_SIZE: "Schriftgröße"
 
