@@ -44,7 +44,11 @@ enabled: true
 
 **Did you incorporate third-party code? Want to thank somebody?**
 
-## To Do
+## Contributing
+The **Vimeo Grav Plugin** follows the [GitFlow branching model](http://nvie.com/posts/a-successful-git-branching-model), from development to release. The ```master``` branch always reflects a production-ready state while the latest development is taking place in the ```develop``` branch.
 
-- [ ] Future plans, if any
+Each time you want to work on a fix or a new feature, create a new branch based on the ```develop``` branch: ```git checkout -b BRANCH_NAME develop```. Only pull requests to the ```develop``` branch will be merged.
 
+## Copyright and license
+
+Copyright &copy; 2017 Christian Worreschk under the [MIT Licence](http://opensource.org/licenses/MIT). See [README](LICENSE).

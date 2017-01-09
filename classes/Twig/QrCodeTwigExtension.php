@@ -48,12 +48,12 @@ class QrCodeTwigExtension extends \Twig_Extension
         $qrCode = new QrCode();
         $qrCode->setText($text);
 
-        if (isset($params['size'])) $qrCode->setSize($params['size']);
-        if (isset($params['padding'])) $qrCode->setPadding($params['padding']);
+        if (isset($params['size'])) $qrCode->setSize((int)$params['size']);
+        if (isset($params['padding'])) $qrCode->setPadding((int)$params['padding']);
         if (isset($params['image_type'])) $qrCode->setImageType($params['image_type']);
         if (isset($params['error_correction_level'])) $qrCode->setErrorCorrection($params['error_correction_level']);
-        if (isset($params['border'])) $qrCode->setDrawBorder(($params['border'] == 1));
-        if (isset($params['quiet_zone'])) $qrCode->setDrawQuietZone(($params['quiet_zone'] == 1));
+        if (isset($params['border'])) $qrCode->setDrawBorder(boolval($params['border']));
+        if (isset($params['quiet_zone'])) $qrCode->setDrawQuietZone(boolval($params['quiet_zone']));
 
         if (isset($params['foreground_color'])){
             $color = $this->buildColorArray($params['foreground_color']);

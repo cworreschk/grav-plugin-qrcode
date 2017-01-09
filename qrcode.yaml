@@ -7,5 +7,5 @@ parameters:
   image_type: png
   foreground_color: "rgba(0, 0, 0, 1)"
   background_color: "rgba(255, 255, 255, 1)"
-  border: 0
-  quiet_zone: 0
+  border: false
+  quiet_zone: false

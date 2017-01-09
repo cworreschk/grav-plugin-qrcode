@@ -13,7 +13,7 @@ use RocketTheme\Toolbox\Event\Event;
 class QrCodePlugin extends Plugin
 {
 
-    const QRCODE_REGEX = '/\[qrcode\](.*)\[\/qrcode\]/i';
+    const QRCODE_REGEX = '/\[qrcode(.*)\](.*)\[\/qrcode\]/i';
 
     /**
      * @return array
@@ -79,13 +79,23 @@ class QrCodePlugin extends Plugin
         $function = function ($matches) use ($twig, $config) {
             $search = $matches[0];
 
-            // double check to make sure we found a text
-            if (!isset($matches[1])) return $search;
+            // Double check to make sure we found something
+            if (!isset($matches[2])) return $search;
 
-            // build the replacement embed HTML string
+            // Parameters
+            $parameters = $config->get('parameters', []);
+            if (isset($matches[1]) && (!empty($matches[1]))) {
+                $params = explode(' ', trim($matches[1]));
+                foreach ($params as $param){
+                    $kv = explode('=', $param);
+                    if (count($kv) == 2) $parameters[trim($kv[0])] = trim($kv[1]);
+                }
+            }
+
+            // Build the replacement embed HTML string
             $replace = $twig->processTemplate('partials/qrcode.html.twig', [
-              'text'   => trim($matches[1]),
-              'parameters' => $config->get('parameters', [])
+              'text'   => trim($matches[2]),
+              'parameters' => $parameters
             ]);
 
             // do the replacement
