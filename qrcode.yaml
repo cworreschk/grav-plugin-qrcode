@@ -1,4 +1,5 @@
 enabled: true
+editor_button: true
 
 parameters:
   size: 200
@@ -11,5 +12,5 @@ parameters:
   quiet_zone: false
   label: ""
   label_font_size: 16
-  logo:
+  logo: ""
   logo_size: 48

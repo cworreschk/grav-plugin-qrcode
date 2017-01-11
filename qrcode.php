@@ -17,6 +17,18 @@ class QrCodePlugin extends Plugin
     const QRCODE_ATTRIBUTES_REGEX = '/(\w+)\s*=\s*((?:[^\"\'\s]+)|\'(?:[^\']*)\'|\"(?:[^\"]*)\")/i';
 
     /**
+     * Returns the plugins translations for the currently logged in user or by the given language
+     * @param string $locale
+     * @return array
+     */
+    private function getPluginTranslations($locale='')
+    {
+        $locale = empty($locale) ? $this->grav['user']->get('language') : $locale;
+        if (!isset($this->grav['languages'][$locale]['PLUGIN_QRCODE'])) $locale = 'en'; // English is the fallback language
+        return $this->grav['languages'][$locale]['PLUGIN_QRCODE'];
+    }
+
+    /**
      * @return array
      *
      * The getSubscribedEvents() gives the core a list of events
@@ -28,28 +40,27 @@ class QrCodePlugin extends Plugin
      */
     public static function getSubscribedEvents()
     {
-        require_once(__DIR__.'/vendor/autoload.php');
         return [
-          'onPageContentRaw' => ['onPageContentRaw', 0],
-          'onTwigExtensions'    => ['onTwigExtensions', 0],
-          'onTwigTemplatePaths' => ['onTwigTemplatePaths', 0],
+          'onPluginsInitialized' => ['onPluginsInitialized', 0],
         ];
     }
 
     /**
      * Initialize the plugin
      */
-    public function onPluginsInitialized()
-    {
-        // Don't proceed if we are in the admin plugin
+    public function onPluginsInitialized() {
         if ($this->isAdmin()) {
-            return;
+            $this->enable([
+              'onAssetsInitialized' => ['onAssetsInitialized', 0]
+            ]);
+        } else {
+            require_once(__DIR__.'/vendor/autoload.php');
+            $this->enable([
+              'onTwigExtensions'    => ['onTwigExtensions', 0],
+              'onTwigTemplatePaths' => ['onTwigTemplatePaths', 0],
+              'onPageContentRaw'    => ['onPageContentRaw', 0]
+            ]);
         }
-
-        // Enable the main event we are interested in
-        $this->enable([
-            'onPageContentRaw' => ['onPageContentRaw', 0]
-        ]);
     }
 
     /**
@@ -79,6 +90,23 @@ class QrCodePlugin extends Plugin
         }
 
         return $config_params;
+    }
+
+    /**
+     * Add Editor Button JS if wanted
+     */
+    public function onAssetsInitialized()
+    {
+        if ((!$this->isAdmin()) || (!$this->config->get('plugins.qrcode.editor_button', false))) return;
+
+        $plugin_translations = $this->getPluginTranslations(); // Workaround User/System language bug (this->grav['language']->translate doesn't work properly)
+        $translations = [
+          'EDITOR_BUTTON_TOOLTIP' => $plugin_translations['EDITOR_BUTTON_TOOLTIP'],
+          'EDITOR_BUTTON_PROMPT' => $plugin_translations['EDITOR_BUTTON_PROMPT']
+        ];
+        $code = 'this.GravAdmin.translations.PLUGIN_QRCODE = '. json_encode($translations, JSON_UNESCAPED_SLASHES) .';';
+        $this->grav['assets']->addInlineJs($code);
+        $this->grav['assets']->add('plugin://qrcode/admin/editor-button/js/button.js');
     }
 
     public function onPageContentRaw(Event $e)

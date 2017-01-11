@@ -26,9 +26,21 @@ form:
       validate:
         type: bool
 
-    parameters.section_general:
+    editor_button:
+      type: toggle
+      label: PLUGIN_QRCODE.EDITOR_BUTTON
+      help: PLUGIN_QRCODE.EDITOR_BUTTON_HELP
+      highlight: 1
+      default: 1
+      options:
+        1: PLUGIN_QRCODE.ENABLED
+        0: PLUGIN_QRCODE.DISABLED
+      validate:
+        type: bool
+
+    section.code:
       type: section
-      title: PLUGIN_QRCODE.GENERAL
+      title: PLUGIN_QRCODE.CODE
       underline: true
       fields:
 
@@ -48,6 +60,7 @@ form:
           type: text
           size: x-small
           label: PLUGIN_QRCODE.PADDING
+          help: PLUGIN_QRCODE.PADDING_HELP
           default: 16
           append: px
           validate:
@@ -113,17 +126,17 @@ form:
           validate:
             type: bool
 
-    parameters.section_label:
+    section.label:
       type: section
       title: PLUGIN_QRCODE.LABEL
-      text: PLUGIN_QRCODE.LABEL_TEXT
+      text:  PLUGIN_QRCODE.LABEL_TEXT
       underline: true
       fields:
 
         parameters.label:
           type: text
           size: medium
-          label: PLUGIN_QRCODE.LABEL
+          label: PLUGIN_QRCODE.TEXT
 
         parameters.label_font_size:
           type: text
@@ -136,29 +149,31 @@ form:
             min: 1
             max: 65535
 
-    parameters.section_logo:
+    section.logo:
       type: section
       title: PLUGIN_QRCODE.LOGO
-      text: PLUGIN_QRCODE.LOGO_TEXT
+      text:  PLUGIN_QRCODE.LOGO_TEXT
       underline: true
       fields:
 
-         parameters.logo:
+        parameters.logo:
             type: file
             label: PLUGIN_QRCODE.IMAGE
             multiple: false
             destination: "user/plugins/qrcode/assets"
             allow:
-              - image/*
+              - image/gif
+              - image/jpeg
+              - image/png
 
-         parameters.logo_size:
-           type: text
-           size: x-small
-           label: PLUGIN_QRCODE.SIZE
-           help: PLUGIN_QRCODE.LOGO_SIZE_HELP
-           append: px
-           default: 48
-           validate:
-             type: number
-             min: 1
-             max: 65535
+        parameters.logo_size:
+          type: text
+          size: x-small
+          label: PLUGIN_QRCODE.SIZE
+          help: PLUGIN_QRCODE.LOGO_SIZE_HELP
+          append: px
+          default: 48
+          validate:
+            type: number
+            min: 1
+            max: 65535
