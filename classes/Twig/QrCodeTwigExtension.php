@@ -39,12 +39,12 @@ class QrCodeTwigExtension extends \Twig_Extension
     public function getFunctions()
     {
         return [
-          new \Twig_SimpleFunction('qrcode_image_data', [$this, 'qrCodeImageData']),
+          new \Twig_SimpleFunction('qrcode_image_data_uri', [$this, 'qrCodeImageDataUri']),
           new \Twig_SimpleFunction('qrcode_image_element', [$this, 'qrCodeImageElement'])
         ];
     }
 
-    public function qrCodeImageData($text, $params = [])
+    public function qrCodeImageDataUri($text, $params = [])
     {
         $qrCode = new QrCode();
         $qrCode->setText($text);
@@ -86,7 +86,7 @@ class QrCodeTwigExtension extends \Twig_Extension
 
     public function qrCodeImageElement($text, $params = [])
     {
-        $data_uri = $this->qrCodeImageData($text, $params);
+        $data_uri = $this->qrCodeImageDataUri($text, $params);
         $image = "<img class=\"qrcode\" src=\"{$data_uri}\"";
 
         // Maybe an alt attribute shall be used
