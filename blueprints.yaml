@@ -1,6 +1,6 @@
 name: QR Code
-version: 0.1.0
-description: QR code generator
+version: 1.0.0
+description:  "**QR Code** is a plugin that generates QR Codes simply by using the shortcode `[qrcode]` in your content."
 icon: qrcode
 author:
   name: Christian Worreschk
