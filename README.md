@@ -82,6 +82,7 @@ qrcode:
     size: 400
     foreground_color: "#aa00cc"
 ---
+```
 
 ## Usage
 
