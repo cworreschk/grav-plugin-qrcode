@@ -1,6 +1,6 @@
 # QR Code Plugin
 
-The **QR Code** Plugin for [Grav CMS](http://github.com/getgrav/grav) uses the library [endroid/QrCode](endroid/QrCode) to create QR Codes. You can simply create and embedd your QR codes in your site by using the shortcode `[qrcode]`.
+The **QR Code** Plugin for [Grav CMS](http://github.com/getgrav/grav) uses the library [endroid/QrCode](endroid/QrCode) to create QR Codes. You can simply create and embedd QR codes in your site by using the shortcode `[qrcode]`.
 
 ### Features
 * Simply create QR Codes with the shortcode `[qrcode]`
@@ -70,7 +70,7 @@ parameters:
 * `alt_attribute` Defines, which content is used for the alt attribute in the &lt;img&gt; tag (`label`, `text` or `none`)
 * `label` A text that will be printed under the QR Code
 * `label_font_size` Font size of the label text in pixels
-* `logo` An image that will be printed in the center of the QR Code. It must have the same image type like the QR Code
+* `logo` The `Grav file` or the path of an image that will be printed in the center of the QR Code. It must have the same image type like the QR Code
 * `logo_size` Logo size (width x height) in pixels
 
 You can also set any of these settings on a per-page basis by adding them under a `qrcode:` setting in your page header. For example:
@@ -100,7 +100,11 @@ In the shortcode you can use all available parameters as attributes to overwrite
  ```markdown
  [qrcode size=300 label="Scan me" border=true]Hello, I'm a QR Code.[/qrcode]
  ```
- 
+
+## Structure
+
+![QR Code](assets/qrcode.png)
+
 ## Twig
 
 This plugin offers two [Twig](http://twig.sensiolabs.org) functions that can be used in your code. `qrcode_image_data_uri()` and `qrcode_image_element()`
