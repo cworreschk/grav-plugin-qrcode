@@ -39,32 +39,66 @@ class QrCodeTwigExtension extends \Twig_Extension
     public function getFunctions()
     {
         return [
-          new \Twig_SimpleFunction('qrcode_image_data', [$this, 'qrCodeImageData'])
+          new \Twig_SimpleFunction('qrcode_image_data_uri', [$this, 'qrCodeImageDataUri']),
+          new \Twig_SimpleFunction('qrcode_image_element', [$this, 'qrCodeImageElement'])
         ];
     }
 
-    public function qrCodeImageData($text, $params = [])
+    public function qrCodeImageDataUri($text, $params = [])
     {
         $qrCode = new QrCode();
         $qrCode->setText($text);
+        $grav = static::getGrav();
 
-        if (isset($params['size'])) $qrCode->setSize($params['size']);
-        if (isset($params['padding'])) $qrCode->setPadding($params['padding']);
-        if (isset($params['image_type'])) $qrCode->setImageType($params['image_type']);
+        if (isset($params['size'])) $qrCode->setSize((int)$params['size']);
+        if (isset($params['padding'])) $qrCode->setPadding((int)$params['padding']);
+        if (isset($params['image_type'])) $qrCode->setImageType(strtolower((string)$params['image_type']));
         if (isset($params['error_correction_level'])) $qrCode->setErrorCorrection($params['error_correction_level']);
-        if (isset($params['border'])) $qrCode->setDrawBorder(($params['border'] == 1));
-        if (isset($params['quiet_zone'])) $qrCode->setDrawQuietZone(($params['quiet_zone'] == 1));
+        if (isset($params['border'])) $qrCode->setDrawBorder(boolval($params['border']));
+        if (isset($params['quiet_zone'])) $qrCode->setDrawQuietZone(boolval($params['quiet_zone']));
 
-        if (isset($params['foreground_color'])){
+        // Label
+        if (isset($params['label'])) {
+            $qrCode->setLabel($params['label']);
+            if (isset($params['label_font_size'])) $qrCode->setLabelFontSize((int)$params['label_font_size']);
+        }
+
+        // Logo
+        if (isset($params['logo']) && file_exists($params['logo'])) {
+            $qrCode->setLogo($params['logo']);
+            if (isset($params['logo']['size'])) $qrCode->setLogoSize((int)$params['logo']['size']);
+        }
+
+        // Foreground
+        if (isset($params['foreground_color'])) {
             $color = $this->buildColorArray($params['foreground_color']);
             if (!is_null($color)) $qrCode->setForegroundColor($color);
         }
+
+        // Background
         if (isset($params['background_color'])){
             $color = $this->buildColorArray($params['background_color']);
             if (!is_null($color)) $qrCode->setBackgroundColor($color);
         }
 
         return $qrCode->getDataUri();
+    }
 
+    public function qrCodeImageElement($text, $params = [])
+    {
+        $data_uri = $this->qrCodeImageDataUri($text, $params);
+        $image = "<img class=\"qrcode\" src=\"{$data_uri}\"";
+
+        // Maybe an alt attribute shall be used
+        if (isset($params['alt_attribute'])) {
+            if ((strtolower($params['alt_attribute']) == 'label') && (!empty($params['label']))) {
+                $image.= " alt=\"{$params['label']}\"";
+            } elseif ((strtolower($params['alt_attribute']) == 'text') && (!empty($text))) {
+                $image.= " alt=\"{$text}\"";
+            }
+        }
+
+        $image.= ' />';
+        return $image;
     }
 }

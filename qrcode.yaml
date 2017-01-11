@@ -1,4 +1,5 @@
 enabled: true
+editor_button: true
 
 parameters:
   size: 200
@@ -7,5 +8,10 @@ parameters:
   image_type: png
   foreground_color: "rgba(0, 0, 0, 1)"
   background_color: "rgba(255, 255, 255, 1)"
-  border: 0
-  quiet_zone: 0
+  border: false
+  quiet_zone: false
+  alt_attribute: none
+  label: ""
+  label_font_size: 16
+  logo: ""
+  logo_size: 48
