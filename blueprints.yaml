@@ -93,6 +93,7 @@ form:
         parameters.foreground_color:
           type: colorpicker
           label: PLUGIN_QRCODE.FOREGROUND_COLOR
+          help: PLUGIN_QRCODE.COLOR_HELP
           highlight: 1
           default: "rgba(0, 0, 0, 1)"
 
@@ -106,6 +107,7 @@ form:
           type: toggle
           label: PLUGIN_QRCODE.BORDER
           help: PLUGIN_QRCODE.BORDER_HELP
+          help: PLUGIN_QRCODE.COLOR_HELP
           highlight: 1
           default: 0
           options:
@@ -125,6 +127,17 @@ form:
             0: PLUGIN_QRCODE.DISABLED
           validate:
             type: bool
+
+        parameters.alt_attribute:
+          type: select
+          size: small
+          label: PLUGIN_QRCODE.ALT_ATTRIBUTE
+          help: PLUGIN_QRCODE.ALT_ATTRIBUTE_HELP
+          default: none
+          options:
+            none: PLUGIN_QRCODE.NONE
+            label: PLUGIN_QRCODE.LABEL
+            text: PLUGIN_QRCODE.TEXT
 
     section.label:
       type: section

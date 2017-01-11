@@ -10,6 +10,7 @@ parameters:
   background_color: "rgba(255, 255, 255, 1)"
   border: false
   quiet_zone: false
+  alt_attribute: none
   label: ""
   label_font_size: 16
   logo: ""

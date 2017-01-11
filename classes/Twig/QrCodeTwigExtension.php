@@ -39,7 +39,8 @@ class QrCodeTwigExtension extends \Twig_Extension
     public function getFunctions()
     {
         return [
-          new \Twig_SimpleFunction('qrcode_image_data', [$this, 'qrCodeImageData'])
+          new \Twig_SimpleFunction('qrcode_image_data', [$this, 'qrCodeImageData']),
+          new \Twig_SimpleFunction('qrcode_image_element', [$this, 'qrCodeImageElement'])
         ];
     }
 
@@ -51,7 +52,7 @@ class QrCodeTwigExtension extends \Twig_Extension
 
         if (isset($params['size'])) $qrCode->setSize((int)$params['size']);
         if (isset($params['padding'])) $qrCode->setPadding((int)$params['padding']);
-        if (isset($params['image_type'])) $qrCode->setImageType($params['image_type']);
+        if (isset($params['image_type'])) $qrCode->setImageType(strtolower((string)$params['image_type']));
         if (isset($params['error_correction_level'])) $qrCode->setErrorCorrection($params['error_correction_level']);
         if (isset($params['border'])) $qrCode->setDrawBorder(boolval($params['border']));
         if (isset($params['quiet_zone'])) $qrCode->setDrawQuietZone(boolval($params['quiet_zone']));
@@ -81,6 +82,23 @@ class QrCodeTwigExtension extends \Twig_Extension
         }
 
         return $qrCode->getDataUri();
+    }
 
+    public function qrCodeImageElement($text, $params = [])
+    {
+        $data_uri = $this->qrCodeImageData($text, $params);
+        $image = "<img class=\"qrcode\" src=\"{$data_uri}\"";
+
+        // Maybe an alt attribute shall be used
+        if (isset($params['alt_attribute'])) {
+            if ((strtolower($params['alt_attribute']) == 'label') && (!empty($params['label']))) {
+                $image.= " alt=\"{$params['label']}\"";
+            } elseif ((strtolower($params['alt_attribute']) == 'text') && (!empty($text))) {
+                $image.= " alt=\"{$text}\"";
+            }
+        }
+
+        $image.= ' />';
+        return $image;
     }
 }
