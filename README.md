@@ -1,6 +1,6 @@
 # QR Code Plugin
 
-The **QR Code** Plugin for [Grav CMS](http://github.com/getgrav/grav) uses the library [endroid/QrCode](endroid/QrCode) to create QR Codes. You can simply create and embedd QR codes in your site by using the shortcode `[qrcode]`.
+The **QR Code** Plugin for [Grav CMS](https://github.com/getgrav/grav) uses the library [endroid/QrCode](https://github.com/endroid/QrCode) to create QR Codes. You can simply create and embedd QR codes in your site by using the shortcode `[qrcode]`.
 
 ### Features
 * Simply create QR Codes with the shortcode `[qrcode]`
