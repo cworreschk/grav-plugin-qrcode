@@ -13,19 +13,31 @@ use RocketTheme\Toolbox\Event\Event;
 class QrCodePlugin extends Plugin
 {
 
+    protected $locale;
+
     const QRCODE_REGEX = '/\[qrcode(.*)\](.*)\[\/qrcode\]/i';
     const QRCODE_ATTRIBUTES_REGEX = '/(\w+)\s*=\s*((?:[^\"\'\s]+)|\'(?:[^\']*)\'|\"(?:[^\"]*)\")/i';
 
     /**
-     * Returns the plugins translations for the currently logged in user or by the given language
-     * @param string $locale
-     * @return array
+     *  Initialize the correct locale
      */
-    private function getPluginTranslations($locale='')
+    private function initializeLocale()
     {
-        $locale = empty($locale) ? $this->grav['user']->get('language') : $locale;
-        if (!isset($this->grav['languages'][$locale]['PLUGIN_QRCODE'])) $locale = 'en'; // English is the fallback language
-        return $this->grav['languages'][$locale]['PLUGIN_QRCODE'];
+        $locales = [];
+        $language = $this->grav['language'];
+
+        // Available Languages
+        if ($this->grav['user']->authenticated) $locales[] = $this->grav['user']->language;
+        if ($language->enabled())$locales[] = $language->getLanguage();
+        $locales[] = 'en';
+
+        $locales = array_unique(array_filter($locales));
+        foreach ($locales as $locale) {
+            if (isset($this->grav['languages'][$locale]['PLUGIN_QRCODE'])) {
+                $this->locale = $locale;
+                break;
+            }
+        }
     }
 
     /**
@@ -41,24 +53,27 @@ class QrCodePlugin extends Plugin
     public static function getSubscribedEvents()
     {
         return [
-          'onPluginsInitialized' => ['onPluginsInitialized', 0],
+            'onPluginsInitialized' => ['onPluginsInitialized', 0],
         ];
     }
 
     /**
      * Initialize the plugin
      */
-    public function onPluginsInitialized() {
+    public function onPluginsInitialized()
+    {
+        $this->initializeLocale();
+
         if ($this->isAdmin()) {
             $this->enable([
-              'onAssetsInitialized' => ['onAssetsInitialized', 0]
+                'onAssetsInitialized' => ['onAssetsInitialized', 0]
             ]);
         } else {
             require_once(__DIR__.'/vendor/autoload.php');
             $this->enable([
-              'onTwigExtensions'    => ['onTwigExtensions', 0],
-              'onTwigTemplatePaths' => ['onTwigTemplatePaths', 0],
-              'onPageContentRaw'    => ['onPageContentRaw', 0]
+                'onTwigExtensions'    => ['onTwigExtensions', 0],
+                'onTwigTemplatePaths' => ['onTwigTemplatePaths', 0],
+                'onPageContentRaw'    => ['onPageContentRaw', 0]
             ]);
         }
     }
@@ -99,12 +114,14 @@ class QrCodePlugin extends Plugin
     {
         if ((!$this->isAdmin()) || (!$this->config->get('plugins.qrcode.editor_button', false))) return;
 
-        $plugin_translations = $this->getPluginTranslations(); // Workaround User/System language bug (this->grav['language']->translate doesn't work properly)
+        $plugin_translations = $this->grav['languages'][$this->locale]['PLUGIN_QRCODE'];
         $translations = [
-          'EDITOR_BUTTON_TOOLTIP' => $plugin_translations['EDITOR_BUTTON_TOOLTIP'],
-          'EDITOR_BUTTON_PROMPT' => $plugin_translations['EDITOR_BUTTON_PROMPT']
+            'EDITOR_BUTTON_TOOLTIP' => $plugin_translations['EDITOR_BUTTON_TOOLTIP'],
+            'EDITOR_BUTTON_PROMPT'  => $plugin_translations['EDITOR_BUTTON_PROMPT']
         ];
-        $code = 'this.GravAdmin.translations.PLUGIN_QRCODE = '. json_encode($translations, JSON_UNESCAPED_SLASHES) .';';
+        $code = 'this.GravQrCodePlugin = this.GravQrCodePlugin || {};';
+        $code.= 'if (!this.GravQrCodePlugin.translations) this.GravQrCodePlugin.translations = '.json_encode($translations, JSON_UNESCAPED_SLASHES) .';';
+
         $this->grav['assets']->addInlineJs($code);
         $this->grav['assets']->add('plugin://qrcode/admin/editor-button/js/button.js');
     }
@@ -138,8 +155,8 @@ class QrCodePlugin extends Plugin
 
             // Build the replacement embed HTML string
             $replace = $twig->processTemplate('partials/qrcode.html.twig', [
-              'text'   => trim($matches[2]),
-              'parameters' => $parameters
+                'text'       => trim($matches[2]),
+                'parameters' => $parameters
             ]);
 
             // do the replacement

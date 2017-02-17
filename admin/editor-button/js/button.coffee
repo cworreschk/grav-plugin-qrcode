@@ -5,7 +5,7 @@
 
       Instance.addButton qrcode:
         identifier: 'qrcode'
-        title: GravAdmin.translations.PLUGIN_QRCODE.EDITOR_BUTTON_TOOLTIP
+        title: GravQrCodePlugin.translations.EDITOR_BUTTON_TOOLTIP
         label: '<i class="fa fa-fw fa-qrcode"></i>'
         modes: [
           'gfm',
@@ -13,7 +13,7 @@
         ]
         action: (e) ->
           e.button.on 'click.editor.qrcode', ->
-            text = prompt(GravAdmin.translations.PLUGIN_QRCODE.EDITOR_BUTTON_PROMPT);
+            text = prompt(GravQrCodePlugin.translations.EDITOR_BUTTON_PROMPT);
             if text
               text = "[qrcode]#{text}[/qrcode]";
 
@@ -25,5 +25,9 @@
 
               e.codemirror.setCursor({ line: posend.line, ch: e.codemirror.getLine(posend.line).length });
               e.codemirror.focus();
-
+              return
+          return
+      return
+    return
+  return
 ) jQuery

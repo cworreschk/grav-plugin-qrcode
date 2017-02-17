@@ -1,3 +1,9 @@
+# v1.0.2
+##  02/17/2017
+
+1. [](#bugfix)
+    * Fixed a bug which could cause problems with the Grav Admin Plugin
+
 # v1.0.1
 ##  01/18/2017
 
