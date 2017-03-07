@@ -27,7 +27,7 @@ class QrCodePlugin extends Plugin
         $language = $this->grav['language'];
 
         // Available Languages
-        if ($this->grav['user']->authenticated) $locales[] = $this->grav['user']->language;
+        if (isset($this->grav['user']) && $this->grav['user']->authenticated) $locales[] = $this->grav['user']->language;
         if ($language->enabled())$locales[] = $language->getLanguage();
         $locales[] = 'en';
 

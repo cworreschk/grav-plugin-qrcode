@@ -1,3 +1,9 @@
+# v1.0.3
+##  03/07/2017
+
+1. [](#bugfix)
+    * Dependency from the `Login Plugin` removed ([Issue #4](https://github.com/cworreschk/grav-plugin-qrcode/issues/4)). Plugin can now be used without the `Admin Panel`.
+
 # v1.0.2
 ##  02/17/2017
 
