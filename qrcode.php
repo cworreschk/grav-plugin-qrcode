@@ -15,7 +15,7 @@ class QrCodePlugin extends Plugin
 
     protected $locale;
 
-    const QRCODE_REGEX = '/\[qrcode(.*)\](.*)\[\/qrcode\]/i';
+    const QRCODE_REGEX = '/\[qrcode(.*?)\](.*?)\[\/qrcode\]/is';
     const QRCODE_ATTRIBUTES_REGEX = '/(\w+)\s*=\s*((?:[^\"\'\s]+)|\'(?:[^\']*)\'|\"(?:[^\"]*)\")/i';
 
     /**
@@ -95,9 +95,14 @@ class QrCodePlugin extends Plugin
         $this->grav['twig']->twig_paths[] = __DIR__ . '/templates';
     }
 
+    /**
+     * @param string $inline
+     * @param array $config_params
+     * @return array
+     */
     private function buildParameters($inline, $config_params)
     {
-        preg_match_all(static::QRCODE_ATTRIBUTES_REGEX, $inline, $matches);
+        preg_match_all(static::QRCODE_ATTRIBUTES_REGEX, trim($inline), $matches);
         if ((!isset($matches[1])) || empty($matches[1])) return $config_params;
 
         foreach ($matches[1] as $idx => $key){
@@ -105,6 +110,33 @@ class QrCodePlugin extends Plugin
         }
 
         return $config_params;
+    }
+
+    /**
+     * @param string $text
+     * @param string $attributes
+     * @param array $page_params
+     * @return string
+     */
+    private function buildQrCode($text='', $attributes='', $page_params=[])
+    {
+        if (empty($text)) return '';
+
+        // Parameters
+        $parameters = $page_params;
+        $attributes = trim($attributes);
+        if (!empty($attributes)) {
+            $parameters = $this->buildParameters($attributes, $page_params);
+        }
+
+        // Build the replacement embed HTML string
+        $twig = $this->grav['twig'];
+        $code = $twig->processTemplate('partials/qrcode.html.twig', [
+            'text'       => trim($text),
+            'parameters' => $parameters
+        ]);
+
+        return $code;
     }
 
     /**
@@ -132,39 +164,30 @@ class QrCodePlugin extends Plugin
         $config = $this->mergeConfig($page, true);
         if (!$config->get('enabled')) return;
 
-        $twig = $this->grav['twig'];
-        $page_params = $config->get('parameters', []);
 
+        // Page parameters
+        $page_params = $config->get('parameters', []);
         if (isset($page_params['logo']) && (!is_string($page_params['logo'])) && (! empty($page_params['logo']))) {
             $logo = reset($page_params['logo']);
             if (isset($logo['path'])) $page_params['logo'] = $logo['path'];
         }
 
-        // Function
-        $function = function ($matches) use ($twig, $page_params) {
-            $search = $matches[0];
+        preg_match_all(static::QRCODE_REGEX, $page->getRawContent(), $matches);
+        $matches = array_filter($matches);
 
+        if (empty($matches) || empty($matches[2])) return;
+
+        $raw_content = $page->getRawContent();
+        $match_count = count($matches[0]);
+
+        for ($idx = 0; $idx < $match_count; $idx++) {
             // Double check to make sure we found something
-            if (!isset($matches[2])) return $search;
+            if (!isset($matches[2][$idx])) continue;
 
-            // Inline Attributes
-            $parameters = $page_params;
-            if (isset($matches[1]) && (!empty($matches[1]))) {
-                $parameters = $this->buildParameters($matches[1], $page_params);
-            }
+            $code = $this->buildQrCode($matches[2][$idx], $matches[1][$idx], $page_params);
+            $raw_content = str_replace($matches[0][$idx], $code, $raw_content);
+        }
 
-            // Build the replacement embed HTML string
-            $replace = $twig->processTemplate('partials/qrcode.html.twig', [
-                'text'       => trim($matches[2]),
-                'parameters' => $parameters
-            ]);
-
-            // do the replacement
-            return str_replace($search, $replace, $search);
-        };
-
-        $raw_content = preg_replace_callback(static::QRCODE_REGEX, $function, $page->getRawContent());
         $page->setRawContent($raw_content);
-
     }
 }
