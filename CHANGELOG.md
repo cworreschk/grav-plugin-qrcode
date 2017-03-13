@@ -1,3 +1,10 @@
+# v1.1.0
+##  03/13/2017
+
+1. [](#improved)
+    * Support of multiple `qrcode` tags on a page. 
+    * Line breaks in `qrcode` tags are now supported ([Issue #6](https://github.com/cworreschk/grav-plugin-qrcode/issues/6)).
+
 # v1.0.3
 ##  03/07/2017
 
