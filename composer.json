@@ -1,5 +1,36 @@
 {
+    "name": "cworreschk/grav-plugin-qrcode",
+    "type": "grav-plugin",
+    "description": "Generates QR Codes simply by using the shortcode `[qrcode]` in your content.",
+    "keywords": ["qr code", "code", "grav", "plugin"],
+    "homepage": "https://github.com/cworreschk/grav-plugin-qrcode",
+    "license": "MIT",
+    "version": "2.0.0-dev",
+    "authors": [
+        {
+            "name": "Christian Worreschk",
+            "email": "cw@marsec.de",
+            "role": "Developer"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/cworreschk/grav-plugin-qrcode/issues",
+        "docs": "https://github.com/cworreschk/grav-plugin-qrcode/blob/master/README.md"
+    },
     "require": {
-        "endroid/qrcode": "~1.9"
+        "php": ">=7.1.3",
+        "endroid/qr-code": "^3.5"
+    },
+    "autoload": {
+        "classmap":  [
+            "classes/",
+            "twig/",
+            "qrcode.php"
+        ]
+    },
+    "config": {
+        "platform": {
+            "php": "7.1.3"
+        }
     }
 }

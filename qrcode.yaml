@@ -1,17 +1,33 @@
 enabled: true
-editor_button: true
 
-parameters:
-  size: 200
-  padding: 16
-  error_correction_level: medium
-  image_type: png
-  foreground_color: "rgba(0, 0, 0, 1)"
-  background_color: "rgba(255, 255, 255, 1)"
-  border: false
-  quiet_zone: false
-  alt_attribute: none
-  label: ""
-  label_font_size: 16
-  logo: ""
-  logo_size: 48
+# Code
+size: 300
+margin: 10
+foreground_color: "rgba(0, 0, 0, 1)"
+background_color: "rgba(255, 255, 255, 1)"
+error_correction_level: medium # low, medium, quartile or high
+
+# Image
+image_type: png
+#writer_options:
+#  exclude_xml_declaration: true
+
+# Label
+label_text: "Scan my code"
+label_font_path: ""
+label_font_size: 20
+label_alignment: center # left, center or right
+label_margin: { b: 20 }
+
+# Logo
+logo_file: ""
+logo_width: 100
+logo_height: 100
+
+# Misc
+alt_attribute: none
+validate_result: false # checks if the result is readable
+
+
+
+

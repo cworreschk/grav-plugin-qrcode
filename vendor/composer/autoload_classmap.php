@@ -6,4 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Grav\\Plugin\\QRCodePlugin' => $baseDir . '/qrcode.php',
+    'Grav\\Plugin\\QRCodeTwigExtension' => $baseDir . '/twig/QRCodeTwigExtension.php',
+    'Grav\\Plugin\\QrCode\\QRCodeGenerator' => $baseDir . '/classes/QRCodeGenerator.php',
 );

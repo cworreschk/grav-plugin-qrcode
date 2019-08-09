@@ -4,35 +4,99 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit8ab9bc93785bf1339b23c8d7b04ac892
+class ComposerStaticInit3feea0e6892339fe5cf62dca8b41a7d6
 {
+    public static $files = array (
+        '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
+        'a9ed0d27b5a698798a89181429f162c5' => __DIR__ . '/..' . '/khanamiryan/qrcode-detector-decoder/lib/Common/customFunctions.php',
+    );
+
     public static $prefixLengthsPsr4 = array (
+        'Z' => 
+        array (
+            'Zxing\\' => 6,
+        ),
         'S' => 
         array (
+            'Symfony\\Polyfill\\Ctype\\' => 23,
+            'Symfony\\Component\\PropertyAccess\\' => 33,
             'Symfony\\Component\\OptionsResolver\\' => 34,
+            'Symfony\\Component\\Inflector\\' => 28,
+        ),
+        'M' => 
+        array (
+            'MyCLabs\\Enum\\' => 13,
         ),
         'E' => 
         array (
             'Endroid\\QrCode\\' => 15,
+            'Endroid\\Installer\\' => 18,
+        ),
+        'D' => 
+        array (
+            'DASPRiD\\Enum\\' => 13,
+        ),
+        'B' => 
+        array (
+            'BaconQrCode\\' => 12,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
+        'Zxing\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/khanamiryan/qrcode-detector-decoder/lib',
+        ),
+        'Symfony\\Polyfill\\Ctype\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/polyfill-ctype',
+        ),
+        'Symfony\\Component\\PropertyAccess\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/property-access',
+        ),
         'Symfony\\Component\\OptionsResolver\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/options-resolver',
         ),
+        'Symfony\\Component\\Inflector\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/inflector',
+        ),
+        'MyCLabs\\Enum\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/myclabs/php-enum/src',
+        ),
         'Endroid\\QrCode\\' => 
         array (
-            0 => __DIR__ . '/..' . '/endroid/qrcode/src',
+            0 => __DIR__ . '/..' . '/endroid/qr-code/src',
         ),
+        'Endroid\\Installer\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/endroid/installer/src',
+        ),
+        'DASPRiD\\Enum\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/dasprid/enum/src',
+        ),
+        'BaconQrCode\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/bacon/bacon-qr-code/src',
+        ),
+    );
+
+    public static $classMap = array (
+        'Grav\\Plugin\\QRCodePlugin' => __DIR__ . '/../..' . '/qrcode.php',
+        'Grav\\Plugin\\QRCodeTwigExtension' => __DIR__ . '/../..' . '/twig/QRCodeTwigExtension.php',
+        'Grav\\Plugin\\QrCode\\QRCodeGenerator' => __DIR__ . '/../..' . '/classes/QRCodeGenerator.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit8ab9bc93785bf1339b23c8d7b04ac892::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit8ab9bc93785bf1339b23c8d7b04ac892::$prefixDirsPsr4;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit3feea0e6892339fe5cf62dca8b41a7d6::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit3feea0e6892339fe5cf62dca8b41a7d6::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit3feea0e6892339fe5cf62dca8b41a7d6::$classMap;
 
         }, null, ClassLoader::class);
     }

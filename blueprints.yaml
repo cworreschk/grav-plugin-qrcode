@@ -1,15 +1,18 @@
 name: QR Code
-version: 1.1.0
+version: 2.0.0-dev
 description:  "**QR Code** is a plugin that generates QR Codes simply by using the shortcode `[qrcode]` in your content."
 icon: qrcode
 author:
   name: Christian Worreschk
   email: cw@marsec.de
 homepage: https://github.com/cworreschk/grav-plugin-qrcode
-keywords: qr code, code
+keywords: qr code, code, grav, plugin
 bugs: https://github.com/cworreschk/grav-plugin-qrcode/issues
 docs: https://github.com/cworreschk/grav-plugin-qrcode/blob/master/README.md
 license: MIT
+
+dependencies:
+  - { name: shortcode-core }
 
 form:
   validation: strict
@@ -17,176 +20,166 @@ form:
 
     enabled:
       type: toggle
-      label: PLUGIN_QRCODE.PLUGIN_STATUS
+      label: PLUGIN_ADMIN.PLUGIN_STATUS
       highlight: 1
       default: 0
       options:
-        1: PLUGIN_QRCODE.ENABLED
-        0: PLUGIN_QRCODE.DISABLED
+        1: PLUGIN_ADMIN.ENABLED
+        0: PLUGIN_ADMIN.DISABLED
       validate:
         type: bool
 
-    editor_button:
-      type: toggle
-      label: PLUGIN_QRCODE.EDITOR_BUTTON
-      help: PLUGIN_QRCODE.EDITOR_BUTTON_HELP
-      highlight: 1
-      default: 1
-      options:
-        1: PLUGIN_QRCODE.ENABLED
-        0: PLUGIN_QRCODE.DISABLED
-      validate:
-        type: bool
+    #------------------------------------------------------------------------------
+    # CODE
+    #------------------------------------------------------------------------------
 
-    section.code:
+    section_code:
       type: section
       title: PLUGIN_QRCODE.CODE
       underline: true
-      fields:
 
-        parameters.size:
-          type: text
-          size: x-small
-          label: PLUGIN_QRCODE.SIZE
-          help: PLUGIN_QRCODE.SIZE_HELP
-          append: px
-          default: 100
-          validate:
-            type: number
-            min: 1
-            max: 65535
+    size:
+      type: number
+      size: x-small
+      label: PLUGIN_QRCODE.SIZE
+      help: PLUGIN_QRCODE.SIZE_HELP
+      append: px
+      default: 300
 
-        parameters.padding:
-          type: text
-          size: x-small
-          label: PLUGIN_QRCODE.PADDING
-          help: PLUGIN_QRCODE.PADDING_HELP
-          default: 16
-          append: px
-          validate:
-            type: number
-            min: 1
-            max: 65535
+    margin:
+      type: number
+      size: x-small
+      label: PLUGIN_QRCODE.MARGIN
+      help: PLUGIN_QRCODE.MARGIN_HELP
+      default: 10
+      append: px
 
-        parameters.error_correction_level:
-          type: select
-          size: small
-          label: PLUGIN_QRCODE.ERROR_CORRECTION_LEVEL
-          help: PLUGIN_QRCODE.ERROR_CORRECTION_LEVEL_HELP
-          default: medium
-          options:
-            low: PLUGIN_QRCODE.EC_LOW
-            medium: PLUGIN_QRCODE.EC_MEDIUM
-            quartile: PLUGIN_QRCODE.EC_QUARTILE
-            high: PLUGIN_QRCODE.EC_HIGH
+    foreground_color:
+      type: colorpicker
+      label: PLUGIN_QRCODE.FOREGROUND_COLOR
+      help: PLUGIN_QRCODE.COLOR_HELP
+      highlight: 1
+      default: "rgba(0, 0, 0, 1)"
 
-        parameters.image_type:
-          type: select
-          size: small
-          label: PLUGIN_QRCODE.IMAGE_TYPE
-          default: png
-          options:
-            gif: GIF
-            jpeg: JPEG
-            png: PNG
+    background_color:
+      type: colorpicker
+      label: PLUGIN_QRCODE.BACKGROUND_COLOR
+      highlight: 1
+      default: "rgba(255, 255, 255, 1)"
 
-        parameters.foreground_color:
-          type: colorpicker
-          label: PLUGIN_QRCODE.FOREGROUND_COLOR
-          help: PLUGIN_QRCODE.COLOR_HELP
-          highlight: 1
-          default: "rgba(0, 0, 0, 1)"
+    error_correction_level:
+      type: select
+      size: small
+      label: PLUGIN_QRCODE.ERROR_CORRECTION_LEVEL
+      help: PLUGIN_QRCODE.ERROR_CORRECTION_LEVEL_HELP
+      default: medium
+      options:
+        low: PLUGIN_QRCODE.EC_LOW
+        medium: PLUGIN_QRCODE.EC_MEDIUM
+        quartile: PLUGIN_QRCODE.EC_QUARTILE
+        high: PLUGIN_QRCODE.EC_HIGH
 
-        parameters.background_color:
-          type: colorpicker
-          label: PLUGIN_QRCODE.BACKGROUND_COLOR
-          highlight: 1
-          default: "rgba(255, 255, 255, 1)"
+    #------------------------------------------------------------------------------
+    # LABEL
+    #------------------------------------------------------------------------------
 
-        parameters.border:
-          type: toggle
-          label: PLUGIN_QRCODE.BORDER
-          help: PLUGIN_QRCODE.BORDER_HELP
-          help: PLUGIN_QRCODE.COLOR_HELP
-          highlight: 1
-          default: 0
-          options:
-            1: PLUGIN_QRCODE.ENABLED
-            0: PLUGIN_QRCODE.DISABLED
-          validate:
-            type: bool
-
-        parameters.quiet_zone:
-          type: toggle
-          label: PLUGIN_QRCODE.QUIET_ZONE
-          help: PLUGIN_QRCODE.QUIET_ZONE_HELP
-          highlight: 1
-          default: 0
-          options:
-            1: PLUGIN_QRCODE.ENABLED
-            0: PLUGIN_QRCODE.DISABLED
-          validate:
-            type: bool
-
-        parameters.alt_attribute:
-          type: select
-          size: small
-          label: PLUGIN_QRCODE.ALT_ATTRIBUTE
-          help: PLUGIN_QRCODE.ALT_ATTRIBUTE_HELP
-          default: none
-          options:
-            none: PLUGIN_QRCODE.NONE
-            label: PLUGIN_QRCODE.LABEL
-            text: PLUGIN_QRCODE.TEXT
-
-    section.label:
+    section_label:
       type: section
-      title: PLUGIN_QRCODE.LABEL
-      text:  PLUGIN_QRCODE.LABEL_TEXT
+      title: 'Label'
       underline: true
-      fields:
 
-        parameters.label:
-          type: text
-          size: medium
-          label: PLUGIN_QRCODE.TEXT
+    label_text:
+      type: text
+      size: large
+      label: Text
+      help: ""
 
-        parameters.label_font_size:
-          type: text
-          size: x-small
-          label: PLUGIN_QRCODE.FONT_SIZE
-          default: 16
-          append: px
-          validate:
-            type: number
-            min: 1
-            max: 65535
+    label_font_path:
+      type: text
+      size: large
+      label: "Font Path"
+      help: "Relative font path to the root of Grav"
+      placeholder: "user/themes/my-theme/fonts/my-font.otf"
 
-    section.logo:
+    label_font_size:
+      type: number
+      size: x-small
+      label: Font Size
+      help: ""
+      default: 16
+      append: px
+
+    label_alignment:
+      type: select
+      size: small
+      label: Alignment
+      help: ""
+      default: center
+      options:
+        left: Left
+        center: Center
+        right: Right
+
+    #------------------------------------------------------------------------------
+    # LOGO
+    #------------------------------------------------------------------------------
+
+    section_logo:
       type: section
       title: PLUGIN_QRCODE.LOGO
-      text:  PLUGIN_QRCODE.LOGO_TEXT
       underline: true
-      fields:
 
-        parameters.logo:
-            type: file
-            label: PLUGIN_QRCODE.IMAGE
-            multiple: false
-            destination: "user/plugins/qrcode/assets"
-            allow:
-              - image/gif
-              - image/jpeg
-              - image/png
+    logo_file:
+      type: file
+      label: PLUGIN_QRCODE.IMAGE
+      multiple: false
+      random_name: true
+      destination: "user/plugins/qrcode/logo"
+      allow:
+        - image/*
 
-        parameters.logo_size:
-          type: text
-          size: x-small
-          label: PLUGIN_QRCODE.SIZE
-          help: PLUGIN_QRCODE.LOGO_SIZE_HELP
-          append: px
-          default: 48
-          validate:
-            type: number
-            min: 1
-            max: 65535
+    logo_width:
+      type: number
+      size: x-small
+      label: Width
+      help: ""
+      append: px
+      default: 100
+
+    logo_height:
+      type: number
+      size: x-small
+      label: Height
+      help: ""
+      append: px
+      default: 100
+
+    #------------------------------------------------------------------------------
+    # IMAGE
+    #------------------------------------------------------------------------------
+#
+#    section_image:
+#      type: section
+#      title: PLUGIN_QRCODE.IMAGE
+#      underline: true
+#
+#    image_type:
+#      type: select
+#      size: small
+#      label: PLUGIN_QRCODE.IMAGE_TYPE
+#      default: png
+#      options:
+#        png: PNG
+#        eps: EPS
+#        svg: SVG
+#
+#    alt_attribute:
+#      type: select
+#      size: small
+#      label: PLUGIN_QRCODE.ALT_ATTRIBUTE
+#      help: PLUGIN_QRCODE.ALT_ATTRIBUTE_HELP
+#      default: none
+#      options:
+#        none: PLUGIN_QRCODE.NONE
+#        label: PLUGIN_QRCODE.LABEL
+#        text: PLUGIN_QRCODE.TEXT

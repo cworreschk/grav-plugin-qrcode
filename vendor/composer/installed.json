@@ -1,27 +1,390 @@
 [
     {
-        "name": "symfony/options-resolver",
-        "version": "v3.2.1",
-        "version_normalized": "3.2.1.0",
+        "name": "bacon/bacon-qr-code",
+        "version": "2.0.0",
+        "version_normalized": "2.0.0.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/symfony/options-resolver.git",
-            "reference": "45940bcad6388b3b6058107eca67ced738d205bb"
+            "url": "https://github.com/Bacon/BaconQrCode.git",
+            "reference": "eaac909da3ccc32b748a65b127acd8918f58d9b0"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/options-resolver/zipball/45940bcad6388b3b6058107eca67ced738d205bb",
-            "reference": "45940bcad6388b3b6058107eca67ced738d205bb",
+            "url": "https://api.github.com/repos/Bacon/BaconQrCode/zipball/eaac909da3ccc32b748a65b127acd8918f58d9b0",
+            "reference": "eaac909da3ccc32b748a65b127acd8918f58d9b0",
             "shasum": ""
         },
         "require": {
-            "php": ">=5.5.9"
+            "dasprid/enum": "^1.0",
+            "ext-iconv": "*",
+            "php": "^7.1"
         },
-        "time": "2016-05-13T18:13:23+00:00",
+        "require-dev": {
+            "phly/keep-a-changelog": "^1.4",
+            "phpunit/phpunit": "^6.4",
+            "squizlabs/php_codesniffer": "^3.1"
+        },
+        "suggest": {
+            "ext-imagick": "to generate QR code images"
+        },
+        "time": "2018-04-25T17:53:56+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "BaconQrCode\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-2-Clause"
+        ],
+        "authors": [
+            {
+                "name": "Ben Scholzen 'DASPRiD'",
+                "email": "mail@dasprids.de",
+                "homepage": "http://www.dasprids.de",
+                "role": "Developer"
+            }
+        ],
+        "description": "BaconQrCode is a QR code generator for PHP.",
+        "homepage": "https://github.com/Bacon/BaconQrCode"
+    },
+    {
+        "name": "dasprid/enum",
+        "version": "1.0.0",
+        "version_normalized": "1.0.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/DASPRiD/Enum.git",
+            "reference": "631ef6e638e9494b0310837fa531bedd908fc22b"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/DASPRiD/Enum/zipball/631ef6e638e9494b0310837fa531bedd908fc22b",
+            "reference": "631ef6e638e9494b0310837fa531bedd908fc22b",
+            "shasum": ""
+        },
+        "require-dev": {
+            "phpunit/phpunit": "^6.4",
+            "squizlabs/php_codesniffer": "^3.1"
+        },
+        "time": "2017-10-25T22:45:27+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "DASPRiD\\Enum\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-2-Clause"
+        ],
+        "authors": [
+            {
+                "name": "Ben Scholzen 'DASPRiD'",
+                "email": "mail@dasprids.de",
+                "homepage": "https://dasprids.de/"
+            }
+        ],
+        "description": "PHP 7.1 enum implementation",
+        "keywords": [
+            "enum",
+            "map"
+        ]
+    },
+    {
+        "name": "endroid/installer",
+        "version": "1.1.3",
+        "version_normalized": "1.1.3.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/endroid/installer.git",
+            "reference": "0d56857e0687837bead9933048a9cc8d4ce85fd7"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/endroid/installer/zipball/0d56857e0687837bead9933048a9cc8d4ce85fd7",
+            "reference": "0d56857e0687837bead9933048a9cc8d4ce85fd7",
+            "shasum": ""
+        },
+        "require": {
+            "composer-plugin-api": "^1.1",
+            "php": ">=7.1"
+        },
+        "time": "2019-03-30T20:54:26+00:00",
+        "type": "composer-plugin",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.x-dev"
+            },
+            "class": "Endroid\\Installer\\Installer"
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Endroid\\Installer\\": "src"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Jeroen van den Enden",
+                "email": "info@endroid.nl"
+            }
+        ]
+    },
+    {
+        "name": "endroid/qr-code",
+        "version": "3.5.8",
+        "version_normalized": "3.5.8.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/endroid/qr-code.git",
+            "reference": "7823badf59402f31e8f9b33ce1e3161a1ba89866"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/endroid/qr-code/zipball/7823badf59402f31e8f9b33ce1e3161a1ba89866",
+            "reference": "7823badf59402f31e8f9b33ce1e3161a1ba89866",
+            "shasum": ""
+        },
+        "require": {
+            "bacon/bacon-qr-code": "^2.0",
+            "endroid/installer": "^1.0.3",
+            "ext-gd": "*",
+            "khanamiryan/qrcode-detector-decoder": "^1.0.2",
+            "myclabs/php-enum": "^1.5",
+            "php": ">=7.1",
+            "symfony/options-resolver": "^2.7|^3.0|^4.0",
+            "symfony/property-access": "^2.7|^3.0|^4.0"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "^5.7|^6.0"
+        },
+        "suggest": {
+            "symfony/http-foundation": "Install if you want to use QrCodeResponse"
+        },
+        "time": "2019-04-03T21:14:10+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
-                "dev-master": "3.2-dev"
+                "dev-master": "3.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Endroid\\QrCode\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Jeroen van den Enden",
+                "email": "info@endroid.nl"
+            }
+        ],
+        "description": "Endroid QR Code",
+        "homepage": "https://github.com/endroid/qr-code",
+        "keywords": [
+            "bundle",
+            "code",
+            "endroid",
+            "php",
+            "qr",
+            "qrcode"
+        ]
+    },
+    {
+        "name": "khanamiryan/qrcode-detector-decoder",
+        "version": "1.0.2",
+        "version_normalized": "1.0.2.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/khanamiryan/php-qrcode-detector-decoder.git",
+            "reference": "a75482d3bc804e3f6702332bfda6cccbb0dfaa76"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/khanamiryan/php-qrcode-detector-decoder/zipball/a75482d3bc804e3f6702332bfda6cccbb0dfaa76",
+            "reference": "a75482d3bc804e3f6702332bfda6cccbb0dfaa76",
+            "shasum": ""
+        },
+        "require": {
+            "php": "^5.6|^7.0"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "^5.7"
+        },
+        "time": "2018-04-26T11:41:33+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Zxing\\": "lib/"
+            },
+            "files": [
+                "lib/Common/customFunctions.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Ashot Khanamiryan",
+                "role": "Developer",
+                "email": "a.khanamiryan@gmail.com",
+                "homepage": "https://github.com/khanamiryan"
+            }
+        ],
+        "description": "QR code decoder / reader",
+        "homepage": "https://github.com/khanamiryan/php-qrcode-detector-decoder/",
+        "keywords": [
+            "barcode",
+            "qr",
+            "zxing"
+        ]
+    },
+    {
+        "name": "myclabs/php-enum",
+        "version": "1.7.1",
+        "version_normalized": "1.7.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/myclabs/php-enum.git",
+            "reference": "f46847626b8739de22e4ebc6b56010f317d4448d"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/myclabs/php-enum/zipball/f46847626b8739de22e4ebc6b56010f317d4448d",
+            "reference": "f46847626b8739de22e4ebc6b56010f317d4448d",
+            "shasum": ""
+        },
+        "require": {
+            "ext-json": "*",
+            "php": ">=7.1"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "^4.8.35|^5.7|^6.0",
+            "squizlabs/php_codesniffer": "1.*"
+        },
+        "time": "2019-05-05T10:12:03+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "MyCLabs\\Enum\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "PHP Enum contributors",
+                "homepage": "https://github.com/myclabs/php-enum/graphs/contributors"
+            }
+        ],
+        "description": "PHP Enum implementation",
+        "homepage": "http://github.com/myclabs/php-enum",
+        "keywords": [
+            "enum"
+        ]
+    },
+    {
+        "name": "symfony/inflector",
+        "version": "v4.3.3",
+        "version_normalized": "4.3.3.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/symfony/inflector.git",
+            "reference": "782e3959ea1fc95923624d6173eaf941ce3029b0"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/symfony/inflector/zipball/782e3959ea1fc95923624d6173eaf941ce3029b0",
+            "reference": "782e3959ea1fc95923624d6173eaf941ce3029b0",
+            "shasum": ""
+        },
+        "require": {
+            "php": "^7.1.3",
+            "symfony/polyfill-ctype": "~1.8"
+        },
+        "time": "2019-07-25T10:54:24+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "4.3-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Symfony\\Component\\Inflector\\": ""
+            },
+            "exclude-from-classmap": [
+                "/Tests/"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Bernhard Schussek",
+                "email": "bschussek@gmail.com"
+            },
+            {
+                "name": "Symfony Community",
+                "homepage": "https://symfony.com/contributors"
+            }
+        ],
+        "description": "Symfony Inflector Component",
+        "homepage": "https://symfony.com",
+        "keywords": [
+            "inflection",
+            "pluralize",
+            "singularize",
+            "string",
+            "symfony",
+            "words"
+        ]
+    },
+    {
+        "name": "symfony/options-resolver",
+        "version": "v4.3.3",
+        "version_normalized": "4.3.3.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/symfony/options-resolver.git",
+            "reference": "40762ead607c8f792ee4516881369ffa553fee6f"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/symfony/options-resolver/zipball/40762ead607c8f792ee4516881369ffa553fee6f",
+            "reference": "40762ead607c8f792ee4516881369ffa553fee6f",
+            "shasum": ""
+        },
+        "require": {
+            "php": "^7.1.3"
+        },
+        "time": "2019-06-13T11:01:17+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "4.3-dev"
             }
         },
         "installation-source": "dist",
@@ -56,44 +419,41 @@
         ]
     },
     {
-        "name": "endroid/qrcode",
-        "version": "1.9.1",
-        "version_normalized": "1.9.1.0",
+        "name": "symfony/polyfill-ctype",
+        "version": "v1.12.0",
+        "version_normalized": "1.12.0.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/endroid/QrCode.git",
-            "reference": "ab09b42778ad67cfe850f9c23165f8d08b756680"
+            "url": "https://github.com/symfony/polyfill-ctype.git",
+            "reference": "550ebaac289296ce228a706d0867afc34687e3f4"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/endroid/QrCode/zipball/ab09b42778ad67cfe850f9c23165f8d08b756680",
-            "reference": "ab09b42778ad67cfe850f9c23165f8d08b756680",
+            "url": "https://api.github.com/repos/symfony/polyfill-ctype/zipball/550ebaac289296ce228a706d0867afc34687e3f4",
+            "reference": "550ebaac289296ce228a706d0867afc34687e3f4",
             "shasum": ""
         },
         "require": {
-            "ext-gd": "*",
-            "php": ">=5.4",
-            "symfony/options-resolver": "^2.3|^3.0"
+            "php": ">=5.3.3"
         },
-        "require-dev": {
-            "phpunit/phpunit": "^4.0|^5.0",
-            "sensio/framework-extra-bundle": "^3.0",
-            "symfony/browser-kit": "^2.3|^3.0",
-            "symfony/framework-bundle": "^2.3|^3.0",
-            "symfony/http-kernel": "^2.3|^3.0"
+        "suggest": {
+            "ext-ctype": "For best performance"
         },
-        "time": "2017-01-03T11:02:14+00:00",
+        "time": "2019-08-06T08:03:45+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
-                "dev-master": "1.x-dev"
+                "dev-master": "1.12-dev"
             }
         },
         "installation-source": "dist",
         "autoload": {
             "psr-4": {
-                "Endroid\\QrCode\\": "src/"
-            }
+                "Symfony\\Polyfill\\Ctype\\": ""
+            },
+            "files": [
+                "bootstrap.php"
+            ]
         },
         "notification-url": "https://packagist.org/downloads/",
         "license": [
@@ -101,20 +461,90 @@
         ],
         "authors": [
             {
-                "name": "Jeroen van den Enden",
-                "email": "info@endroid.nl",
-                "homepage": "http://endroid.nl/"
+                "name": "Gert de Pagter",
+                "email": "BackEndTea@gmail.com"
+            },
+            {
+                "name": "Symfony Community",
+                "homepage": "https://symfony.com/contributors"
             }
         ],
-        "description": "Endroid QR Code",
-        "homepage": "https://github.com/endroid/QrCode",
+        "description": "Symfony polyfill for ctype functions",
+        "homepage": "https://symfony.com",
         "keywords": [
-            "bundle",
-            "code",
-            "endroid",
-            "qr",
-            "qrcode",
-            "symfony"
+            "compatibility",
+            "ctype",
+            "polyfill",
+            "portable"
+        ]
+    },
+    {
+        "name": "symfony/property-access",
+        "version": "v4.3.3",
+        "version_normalized": "4.3.3.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/symfony/property-access.git",
+            "reference": "42f3a6ddcb794c303d8fdbc33faf3f09cfefee62"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/symfony/property-access/zipball/42f3a6ddcb794c303d8fdbc33faf3f09cfefee62",
+            "reference": "42f3a6ddcb794c303d8fdbc33faf3f09cfefee62",
+            "shasum": ""
+        },
+        "require": {
+            "php": "^7.1.3",
+            "symfony/inflector": "~3.4|~4.0"
+        },
+        "require-dev": {
+            "symfony/cache": "~3.4|~4.0"
+        },
+        "suggest": {
+            "psr/cache-implementation": "To cache access methods."
+        },
+        "time": "2019-07-24T14:47:54+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "4.3-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Symfony\\Component\\PropertyAccess\\": ""
+            },
+            "exclude-from-classmap": [
+                "/Tests/"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Fabien Potencier",
+                "email": "fabien@symfony.com"
+            },
+            {
+                "name": "Symfony Community",
+                "homepage": "https://symfony.com/contributors"
+            }
+        ],
+        "description": "Symfony PropertyAccess Component",
+        "homepage": "https://symfony.com",
+        "keywords": [
+            "access",
+            "array",
+            "extraction",
+            "index",
+            "injection",
+            "object",
+            "property",
+            "property path",
+            "reflection"
         ]
     }
 ]
