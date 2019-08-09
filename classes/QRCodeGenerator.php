@@ -9,11 +9,19 @@ use Endroid\QrCode\QrCode;
 class QRCodeGenerator {
 
     /** @var array $defaults Parameters */
-    protected $defaults;
+    private $defaults;
 
     const HEX_REGEX  = '/#(\S{2})(\S{2})(\S{2})/';
     const RGB_REGEX  = '/rgb\(\s?(\d+)\s?,\s?(\d+)\s?,\s?(\d+)\s?\)/i';
     const RGBA_REGEX = '/rgba\(\s?(\d+)\s?,\s?(\d+)\s?,\s?(\d+)\s?,\s?(\d+)\s?\)/i';
+
+    /**
+     * @return array
+     */
+    public function getDefaults(): array
+    {
+        return $this->defaults;
+    }
 
     /**
      * QRCodeGenerator constructor.
@@ -86,19 +94,19 @@ class QRCodeGenerator {
             //        $code->setLabelMargin();
         }
 
-        if (isset($options['image_type'])) {
-            $code->setWriterByName($options['image_type']);
-        }
-
         // Logo
         if (!empty($options['logo_file'])) {
             $code->setLogoPath(ROOT_DIR.ltrim(key($options['logo_file']), '/'));
             $code->setLogoSize($options['logo_width'], $options['logo_height']);
         }
 
-        header('Content-Type: '.$code->getContentType());
-        echo $code->writeString();
-        exit();
+        if (isset($options['image_format'])) {
+            $code->setWriterByName($options['image_format']);
+        }
+
+        if (isset($options['encoding'])) {
+            $code->setEncoding($options['encoding']);
+        }
 
         return $code->writeDataUri();
     }

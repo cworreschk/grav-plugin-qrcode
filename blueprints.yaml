@@ -157,29 +157,37 @@ form:
     #------------------------------------------------------------------------------
     # IMAGE
     #------------------------------------------------------------------------------
-#
-#    section_image:
-#      type: section
-#      title: PLUGIN_QRCODE.IMAGE
-#      underline: true
-#
-#    image_type:
-#      type: select
-#      size: small
-#      label: PLUGIN_QRCODE.IMAGE_TYPE
-#      default: png
-#      options:
-#        png: PNG
-#        eps: EPS
-#        svg: SVG
-#
-#    alt_attribute:
-#      type: select
-#      size: small
-#      label: PLUGIN_QRCODE.ALT_ATTRIBUTE
-#      help: PLUGIN_QRCODE.ALT_ATTRIBUTE_HELP
-#      default: none
-#      options:
-#        none: PLUGIN_QRCODE.NONE
-#        label: PLUGIN_QRCODE.LABEL
-#        text: PLUGIN_QRCODE.TEXT
+
+    section_misc:
+      type: section
+      title: Miscellaneous
+      underline: true
+
+    encoding:
+      type: select
+      size: medium
+      label: Encoding
+      default: UTF-8
+      data-options@: '\Grav\Plugin\QRCodePlugin::encodings'
+      options: []
+
+    image_format:
+      type: select
+      size: small
+      label: PLUGIN_QRCODE.IMAGE_TYPE
+      default: png
+      options:
+        png: PNG
+        eps: EPS
+        svg: SVG
+
+    alt_attribute:
+      type: select
+      size: small
+      label: PLUGIN_QRCODE.ALT_ATTRIBUTE
+      help: PLUGIN_QRCODE.ALT_ATTRIBUTE_HELP
+      default: none
+      options:
+        none: PLUGIN_QRCODE.NONE
+        label: PLUGIN_QRCODE.LABEL
+        content: PLUGIN_QRCODE.TEXT

@@ -2,7 +2,6 @@
 
 namespace Grav\Plugin;
 
-use Composer\Autoload\ClassLoader;
 use Grav\Common\Plugin;
 use Grav\Plugin\QrCode\QRCodeGenerator;
 
@@ -14,13 +13,19 @@ use Grav\Plugin\QrCode\QRCodeGenerator;
 class QRCodePlugin extends Plugin
 {
 
+    public static function encodings() {
+        $encodings = mb_list_encodings();
+        sort ($encodings);
+        return array_combine($encodings, $encodings);
+    }
+
     /**
      * @return array
      */
     public static function getSubscribedEvents(): array
     {
         return [
-            'onPluginsInitialized' => [['onPluginsInitialized', 0]]
+            'onPluginsInitialized' => ['onPluginsInitialized', 0]
         ];
     }
 
@@ -38,8 +43,6 @@ class QRCodePlugin extends Plugin
         require_once __DIR__ . '/vendor/autoload.php';
 
         $this->grav['qrcode'] = $generator = new QRCodeGenerator($this->config->get('plugins.qrcode'));
-
-        $generator->generate('Hallo Welt');
 
         // Enable the main events we are interested in
         $this->enable([
@@ -72,5 +75,4 @@ class QRCodePlugin extends Plugin
     {
         $this->grav['shortcode']->registerAllShortcodes(__DIR__.'/shortcodes');
     }
-
 }

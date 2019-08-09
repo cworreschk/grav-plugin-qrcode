@@ -8,7 +8,7 @@ background_color: "rgba(255, 255, 255, 1)"
 error_correction_level: medium # low, medium, quartile or high
 
 # Image
-image_type: png
+image_format: png
 #writer_options:
 #  exclude_xml_declaration: true
 
@@ -25,8 +25,8 @@ logo_width: 100
 logo_height: 100
 
 # Misc
+encoding: "UTF-8"
 alt_attribute: none
-validate_result: false # checks if the result is readable
 
 
 
