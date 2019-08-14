@@ -13,7 +13,7 @@ class QRCodeGenerator {
 
     const HEX_REGEX  = '/#(\S{2})(\S{2})(\S{2})/';
     const RGB_REGEX  = '/rgb\(\s?(\d+)\s?,\s?(\d+)\s?,\s?(\d+)\s?\)/i';
-    const RGBA_REGEX = '/rgba\(\s?(\d+)\s?,\s?(\d+)\s?,\s?(\d+)\s?,\s?(\d+)\s?\)/i';
+    const RGBA_REGEX = '/rgba\(\s?(\d+)\s?,\s?(\d+)\s?,\s?(\d+)\s?,\s?(\S+)\s?\)/i';
 
     /**
      * @return array
