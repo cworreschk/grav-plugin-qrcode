@@ -23,18 +23,26 @@ class QRCodeShortcode extends Shortcode
 
             $options = $this->grav['qrcode']->getDefaults();
 
+            // Alt attribute
             $alt = '';
-            if (isset($options['alt_attribute'])) {
-                switch($options['alt_attribute']) {
+            if (isset($options['html_element_alt'])) {
+                switch($options['html_element_alt']) {
                     case 'content': $alt = $content; break;
                     case 'label':   $alt = empty($options['label_text']) ? '' : $options['label_text']; break;
                 }
             }
 
+            // CSS classes
+            $classes = ['qrcode'];
+            if (!empty($options['html_element_classes'])) {
+                $classes = array_merge($classes, $options['html_element_classes']);
+            }
+
             $output = $this->twig->processTemplate('partials/qrcode.html.twig', [
-                'source' => $code,
-                'hash'   => $hash,
-                'alt'    => $alt
+                'source'  => $code,
+                'hash'    => $hash,
+                'classes' => implode(' ', $classes),
+                'alt'     => $alt
             ]);
 
             return $output;

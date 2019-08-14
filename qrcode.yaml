@@ -7,27 +7,21 @@ foreground_color: "rgba(0, 0, 0, 1)"
 background_color: "rgba(255, 255, 255, 1)"
 error_correction_level: medium # low, medium, quartile or high
 
-# Image
-image_format: png
-#writer_options:
-#  exclude_xml_declaration: true
-
 # Label
 label_text: "Scan my code"
 label_font_path: ""
 label_font_size: 20
 label_alignment: center # left, center or right
-label_margin: { b: 20 }
 
 # Logo
-logo_file: ""
+logo_file: null
 logo_width: 100
 logo_height: 100
 
+# HTML
+html_element_classes: []
+html_element_alt: none
+
 # Misc
+image_format: png # png, svg
 encoding: "UTF-8"
-alt_attribute: none
-
-
-
-

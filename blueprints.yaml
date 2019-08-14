@@ -1,6 +1,6 @@
 name: QR Code
 version: 2.0.0-dev
-description:  "**QR Code** is a plugin that generates QR Codes simply by using the shortcode `[qrcode]` in your content."
+description:  '**QR Code** is a plugin that generates QR Codes simply by using the shortcode `[qrcode]` in your content.'
 icon: qrcode
 author:
   name: Christian Worreschk
@@ -59,13 +59,13 @@ form:
       label: PLUGIN_QRCODE.FOREGROUND_COLOR
       help: PLUGIN_QRCODE.COLOR_HELP
       highlight: 1
-      default: "rgba(0, 0, 0, 1)"
+      default: 'rgba(0, 0, 0, 1)'
 
     background_color:
       type: colorpicker
       label: PLUGIN_QRCODE.BACKGROUND_COLOR
       highlight: 1
-      default: "rgba(255, 255, 255, 1)"
+      default: 'rgba(255, 255, 255, 1)'
 
     error_correction_level:
       type: select
@@ -86,26 +86,27 @@ form:
     section_label:
       type: section
       title: 'Label'
+      text: '<strong style="color: #06A599;"><i class="fa fa-fw fa-warning"></i> Is only supported for the image format PNG</strong>'
       underline: true
 
     label_text:
       type: text
       size: large
       label: Text
-      help: ""
+      help: ''
 
     label_font_path:
       type: text
       size: large
-      label: "Font Path"
-      help: "Relative font path to the root of Grav"
-      placeholder: "user/themes/my-theme/fonts/my-font.otf"
+      label: 'Font Path'
+      help: 'Relative font path to the root of Grav'
+      placeholder: 'user/themes/my-theme/fonts/my-font.otf'
 
     label_font_size:
       type: number
       size: x-small
       label: Font Size
-      help: ""
+      help: ''
       default: 16
       append: px
 
@@ -113,7 +114,7 @@ form:
       type: select
       size: small
       label: Alignment
-      help: ""
+      help: ''
       default: center
       options:
         left: Left
@@ -134,7 +135,7 @@ form:
       label: PLUGIN_QRCODE.IMAGE
       multiple: false
       random_name: true
-      destination: "user/plugins/qrcode/logo"
+      destination: 'user/plugins/qrcode/logo'
       allow:
         - image/*
 
@@ -142,7 +143,7 @@ form:
       type: number
       size: x-small
       label: Width
-      help: ""
+      help: ''
       append: px
       default: 100
 
@@ -150,12 +151,41 @@ form:
       type: number
       size: x-small
       label: Height
-      help: ""
+      help: ''
       append: px
       default: 100
+      
+    #------------------------------------------------------------------------------
+    # HTML
+    #------------------------------------------------------------------------------
+
+    section_html:
+      type: section
+      title: HTML element
+      underline: true
+
+    html_element_alt:
+      type: select
+      size: small
+      label: PLUGIN_QRCODE.ALT_ATTRIBUTE
+      help: PLUGIN_QRCODE.ALT_ATTRIBUTE_HELP
+      default: none
+      options:
+        none: PLUGIN_QRCODE.NONE
+        label: PLUGIN_QRCODE.LABEL
+        content: PLUGIN_QRCODE.TEXT
+
+    html_element_classes:
+      type: selectize
+      size: large
+      label: 'CSS classes'
+      classes: fancy
+      help: PLUGIN_QRCODE.HTML_CLASSES_HELP
+      validate:
+        type: commalist
 
     #------------------------------------------------------------------------------
-    # IMAGE
+    # Miscellaneous
     #------------------------------------------------------------------------------
 
     section_misc:
@@ -169,7 +199,8 @@ form:
       label: Encoding
       default: UTF-8
       data-options@: '\Grav\Plugin\QRCodePlugin::encodings'
-      options: []
+      options:
+        'UTF-8': 'UTF-8'
 
     image_format:
       type: select
@@ -180,14 +211,3 @@ form:
         png: PNG
         eps: EPS
         svg: SVG
-
-    alt_attribute:
-      type: select
-      size: small
-      label: PLUGIN_QRCODE.ALT_ATTRIBUTE
-      help: PLUGIN_QRCODE.ALT_ATTRIBUTE_HELP
-      default: none
-      options:
-        none: PLUGIN_QRCODE.NONE
-        label: PLUGIN_QRCODE.LABEL
-        content: PLUGIN_QRCODE.TEXT

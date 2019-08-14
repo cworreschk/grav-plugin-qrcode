@@ -1,1 +1,1 @@
-<img class="qrcode" data-hash="{{ hash }}" src="{{ source|raw }}" alt="{{ alt }}">
+<img class="{{ classes }}" data-hash="{{ hash }}" src="{{ source|raw }}"{{ alt ? " alt=\"#{ alt }\"" : '' }}>
